@@ -9,7 +9,7 @@ public class PlayerCollision : MonoBehaviour{
     public float Delay = 2f;
 
     void Start(){
-        //½T«O movement ÅÜ¼Æ³Q¥¿½Tªì©l¤Æ
+        //ç¢ºä¿ movement è®Šæ•¸è¢«æ­£ç¢ºåˆå§‹åŒ–
         if (movement == null){
             movement = GetComponent<playMovement>();
         }
@@ -17,28 +17,29 @@ public class PlayerCollision : MonoBehaviour{
 
     void OnCollisionEnter(Collision collisionInfo) {
 
-        //³B²z»P»ÙÃªª«ªº¸I¼²
+        //è™•ç†èˆ‡éšœç¤™ç‰©çš„ç¢°æ’
         if (collisionInfo.collider.tag == "obstcal"){
 
-            //°±¤îª±®a²¾°Ê
+            //åœæ­¢ç©å®¶ç§»å‹•
             movement.enabled = false;
             FindObjectOfType<GameManager1>().EndGame();
 
-            //°±¤î­p¤À
+            //åœæ­¢è¨ˆåˆ†
             FindObjectOfType<Score>().StopScoring();
         }
 
-        //¦pªG¼²¨ì²×ÂI½u
+        //å¦‚æœæ’åˆ°çµ‚é»ç·š
         if (collisionInfo.collider.tag == "endLine") {
 
+            //å»¶é²å‘¼å« Completelevel
             Invoke("Completelevel", Delay);
-            //°±¤î­p¤À
+            //åœæ­¢è¨ˆåˆ†
             FindObjectOfType<Score>().StopScoring();
 
         }
     }
 
-    //©µ¿ğCompletelevel UI
+    //å‘¼å«Completelevel UI
     public void Completelevel(){
 
         FindObjectOfType<GameManager1>().Completelevel();

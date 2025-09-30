@@ -11,7 +11,7 @@ public class ObstcalMove : MonoBehaviour{
 
         rb = GetComponent<Rigidbody>();
 
-        //Âê©w©Ò¦³±ÛÂà
+        //éŽ–å®šæ‰€æœ‰æ—‹è½‰
         rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 

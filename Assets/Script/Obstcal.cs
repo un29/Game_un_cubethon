@@ -43,6 +43,7 @@ public class Obstcal : MonoBehaviour
         Invoke("EndLine", Delay);
     }
 
+    //每幀累加時間 間隔生成障礙物
     void Update(){
 
         if (!spawning) return;

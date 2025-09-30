@@ -4,30 +4,31 @@ using UnityEngine;
 
 public class Obstcal : MonoBehaviour
 {
-    //¥Í¦¨³]©w
-    public GameObject obstaclePrefab;    //©ì¤J§A­n¥Í¦¨ªº»ÙÃªª« prefab
-    public int poolSize = 10;            //¹w¥ı¥Í¦¨ªºª«¥ó¼Æ¶q
-    public float spawnInterval = 0.8f;   //¨C´X¬í¥Í¦¨¤@¦¸
-    public float spawnDuration = 15f;    //«ùÄò´X¬í
+    //ç”Ÿæˆè¨­å®š
+    public GameObject obstaclePrefab;    //æ‹–å…¥ä½ è¦ç”Ÿæˆçš„éšœç¤™ç‰© prefab
+    public int poolSize = 10;            //é å…ˆç”Ÿæˆçš„ç‰©ä»¶æ•¸é‡
+    public float spawnInterval = 0.8f;   //æ¯å¹¾ç§’ç”Ÿæˆä¸€æ¬¡
+    public float spawnDuration = 15f;    //æŒçºŒå¹¾ç§’
 
-    //¥Í¦¨¦ì¸m³]©w
-    public float spawnZ = 55f;           //Z ¶b¦ì¸m¡]¶ZÂ÷ª±®a¦h»·¡^
-    public float spawnXRange = 6.2f;     //ÀH¾÷¥Í¦¨ªº X ¶b½d³ò¡]¥ª¥k¡^
+    //ç”Ÿæˆä½ç½®è¨­å®š
+    public float spawnZ = 55f;           //Zè»¸å›ºå®šç©å®¶ä½ç½®ï¼ˆè·é›¢ç©å®¶å¤šé ï¼‰
+    public float spawnXRange = 6.2f;     //Xè»¸éš¨æ©Ÿç”Ÿæˆç¯„åœï¼ˆå·¦å³ï¼‰
 
-    //µ²§ô»P²×ÂI½u
+    //çµæŸèˆ‡çµ‚é»ç·š
     public GameObject endLine;
     public float Delay = 7f;
 
+    //ç‰©ä»¶æ± 
     private List<GameObject> obstaclePool = new List<GameObject>();
     private float spawnTimer = 0f;
     private bool spawning = true;
 
     void Start(){
 
-        //Ãö³¬²×ÂI½u
+        //é—œé–‰çµ‚é»ç·š
         endLine.SetActive(false);
 
-        //«Ø¥ßª«¥ó¦À
+        //å»ºç«‹ç‰©ä»¶æ± 
         for (int i = 0; i < poolSize; i++){
 
             GameObject obj = Instantiate(obstaclePrefab);
@@ -35,10 +36,10 @@ public class Obstcal : MonoBehaviour
             obstaclePool.Add(obj);
         }
 
-        //°±¤î¥Í¦¨ªº®É¶¡ÂI
+        //åœæ­¢ç”Ÿæˆçš„æ™‚é–“é»
         Invoke("StopSpawning", spawnDuration);
 
-        //Åã¥Ü²×ÂI½u
+        //é¡¯ç¤ºçµ‚é»ç·š
         Invoke("EndLine", Delay);
     }
 
@@ -54,7 +55,7 @@ public class Obstcal : MonoBehaviour
         }
     }
 
-    //¥Í¦¨
+    //éš¨æ©Ÿç”Ÿæˆ
     void SpawnObstacle(){
 
         GameObject obj = GetPooledObstacle();
@@ -69,13 +70,16 @@ public class Obstcal : MonoBehaviour
 
     }
 
-    //ª«¥ó¦À
+    //ç‰©ä»¶æ± æœå°‹  (æ‰¾åˆ° æ²’ä½¿ç”¨çš„éšœç¤™ç‰©è¿”å› / éƒ½åœ¨å›å‚³ null)
     GameObject GetPooledObstacle(){
 
         foreach (GameObject obj in obstaclePool){
-
+            
+            //å¦‚æœé€™å€‹ç‰©ä»¶é‚„æ²’è¢«ä½¿ç”¨
             if (!obj.activeInHierarchy)
-                return obj;
+            
+                //æŠŠå®ƒæ‹¿å‡ºä¾†ä½¿ç”¨
+                return obj;  
         }
 
         return null;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager1 : MonoBehaviour{
 
-    bool gameHasEnded = false;
+    bool gameHasEnded = false;          //避免多次呼叫 EndGame()
 
     public float restartDelay = 1f;
 
@@ -15,7 +15,7 @@ public class GameManager1 : MonoBehaviour{
         levelcompleteUI.SetActive(true);
     }
 
-    //����levelcomplete
+    //延遲levelcomplete
     public void DelayLoad(){
 
         FindObjectOfType<levelcomplete>().LoadNextLevel();

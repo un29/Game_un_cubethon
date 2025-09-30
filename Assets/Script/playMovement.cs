@@ -6,14 +6,14 @@ using UnityEngine.Assertions.Must;
 public class playMovement : MonoBehaviour{
 
     public Rigidbody rb;
-    public float sidewaysForce = 50000f; //³]©w¥ª¥k²¾°Ê³t«×
-    public float boundary = 5f;          //³]©w¥ª¥k²¾°Ê½d³ò
+    public float sidewaysForce = 50000f; //è¨­å®šå·¦å³ç§»å‹•é€Ÿåº¦
+    public float boundary = 5f;          //è¨­å®šå·¦å³ç§»å‹•ç¯„åœ
 
     void Start(){
 
         rb = GetComponent<Rigidbody>();
 
-        //Âê©w±ÛÂà XZ
+        //é–å®šæ—‹è½‰ XZ é¿å…ç¿»è½‰
         rb.constraints = RigidbodyConstraints.FreezeRotationX;
         rb.constraints = RigidbodyConstraints.FreezeRotationZ;
 
@@ -21,14 +21,14 @@ public class playMovement : MonoBehaviour{
 
     void FixedUpdate(){
 
-        //Àò¨úª±®a¿é¤J (-1 ~ 1)
+        //ç²å–ç©å®¶è¼¸å…¥ (-1 ~ 1)
         float move = Input.GetAxis("Horizontal");
 
-        //ª½±µ§ïÅÜ³t«× µ¥³t²¾°Ê
+        //ç›´æ¥æ”¹è®Šé€Ÿåº¦ ç­‰é€Ÿç§»å‹•
         rb.velocity = new Vector3(move * 10f, rb.velocity.y, rb.velocity.z);
 
 
-        //±¼¤U¥hµ²§ô¹CÀ¸
+        //æ‰ä¸‹å»çµæŸéŠæˆ²
         if (rb.position.y <-1f){
 
             FindObjectOfType<GameManager1>().EndGame();

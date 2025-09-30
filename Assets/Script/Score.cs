@@ -10,21 +10,25 @@ public class Score : MonoBehaviour{
 
     public Transform player;
     public TextMeshProUGUI scoreText;
-
-    public float score1 = 0f;
-    public float scoreSpeed = 10f; //�C���[�X��
-    private bool isScoring = true;
+    public Transform endLine;         //終點線位置
+       
+    private bool isScoring = true;    //是否計分
 
     void Update (){
 
         if (isScoring){
 
-            score1 += scoreSpeed * Time.deltaTime;
-            scoreText.text = (Mathf.FloorToInt(score1/10).ToString()+"m");
+            //計算玩家到終點距離
+            float distance = endLine.position.z - player.position.z;
+
+            //避免顯示負數
+            distance = Mathf.Max(0, distance);
+
+            scoreText.text = Mathf.FloorToInt((distance - 11)/10).ToString() + "m";
         }
     }
 
-    //����p��
+    //停止計分
     public void StopScoring(){
 
         isScoring = false;

@@ -74,7 +74,7 @@ public class Obstcal : MonoBehaviour
 
     }
 
-    //物件池搜尋沒有用到的  (如果都在使用 回傳 nulll)
+    //物件池搜尋沒有用到的  (如果都在使用 回傳null)
     GameObject GetPooledObstacle(){
 
         foreach (GameObject obj in obstaclePool){

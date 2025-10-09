@@ -5,23 +5,23 @@ using UnityEngine;
 public class Obstcal : MonoBehaviour
 {
     //生成設定
-    public GameObject obstaclePrefab;    //拖入你要生成的障礙物 prefab
-    public int poolSize = 10;            //預先生成的物件數量
-    public float spawnInterval = 0.8f;   //每幾秒生成一次
-    public float spawnDuration = 15f;    //持續幾秒
+    public GameObject obstaclePrefab;    //障礙物
+    public int poolSize = 10;            //物件池數量大小
+    public float spawnInterval = 0.8f;   //每幾秒生成一次障礙物
+    public float spawnDuration = 15f;    //持續生成幾秒
 
     //生成位置設定
-    public float spawnZ = 55f;           //Z軸固定玩家位置（距離玩家多遠）
+    public float spawnZ = 55f;           //Z軸固定玩家前方位置（距離玩家多遠）
     public float spawnXRange = 6.2f;     //X軸隨機生成範圍（左右）
 
-    //結束與終點線
+    //終點線
     public GameObject endLine;
-    public float Delay = 7f;
+    public float Delay = 7f;             //終點線延遲秒數
 
     //物件池
     private List<GameObject> obstaclePool = new List<GameObject>();
     private float spawnTimer = 0f;
-    private bool spawning = true;
+    private bool spawning = true;       
 
     void Start(){
 
@@ -48,15 +48,17 @@ public class Obstcal : MonoBehaviour
 
         if (!spawning) return;
 
+        //計算生成間隔
         spawnTimer += Time.deltaTime;
-        if (spawnTimer >= spawnInterval){
 
+        //當累積時間 >= 設定間隔時生成障礙物
+        if (spawnTimer >= spawnInterval){
             spawnTimer = 0f;
             SpawnObstacle();
         }
     }
 
-    //隨機生成
+    //隨機生成障礙物
     void SpawnObstacle(){
 
         GameObject obj = GetPooledObstacle();
@@ -65,13 +67,14 @@ public class Obstcal : MonoBehaviour
             float randomX = Random.Range(-spawnXRange, spawnXRange);
             Vector3 spawnPosition = new Vector3(randomX, 0.5f, spawnZ);
 
+            //設定障礙物位置 啟用
             obj.transform.position = spawnPosition;
             obj.SetActive(true);
         }
 
     }
 
-    //物件池搜尋  (找到 沒使用的障礙物返回 / 都在回傳 null)
+    //物件池搜尋沒有用到的  (如果都在使用 回傳 nulll)
     GameObject GetPooledObstacle(){
 
         foreach (GameObject obj in obstaclePool){
